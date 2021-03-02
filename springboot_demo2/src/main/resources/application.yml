@@ -13,7 +13,6 @@ spring:
 
 #SpringBoot整合Mybatis
 mybatis-plus:
-
   #定义别名包 作用: 以后封装POJO对象时自动进行拼接
   type-aliases-package: com.cgb.pojo
   #引入mapper配置文件
@@ -21,3 +20,7 @@ mybatis-plus:
   #开启驼峰映射
   configuration:
     map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.cgb.dao: debug

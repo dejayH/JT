@@ -26,4 +26,12 @@ class SpringbootDemo2ApplicationTests {
 
     }
 
+    @Test
+    public void insert(){
+        UserPojo user = new UserPojo();
+        user.setName("猴子").setAge(800).setSex("女");
+        userDao.insert(user);
+
+    }
+
 }
