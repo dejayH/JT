@@ -1,0 +1,23 @@
+server:
+  port: 80
+  servlet:
+    #项目默认发布路径/根目录
+    context-path: /
+
+#SpringBoot数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql:///jtdb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: root
+
+#SpringBoot整合Mybatis
+mybatis-plus:
+
+  #定义别名包 作用: 以后封装POJO对象时自动进行拼接
+  type-aliases-package: com.cgb.pojo
+  #引入mapper配置文件
+  mapper-locations: classpath:/mappers/*.xml
+  #开启驼峰映射
+  configuration:
+    map-underscore-to-camel-case: true
