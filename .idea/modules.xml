@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JT.iml" filepath="$PROJECT_DIR$/.idea/JT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jt/jt.iml" filepath="$PROJECT_DIR$/jt/jt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jt/jt_common/jt_common.iml" filepath="$PROJECT_DIR$/jt/jt_common/jt_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jt/jt_manage/jt_manage.iml" filepath="$PROJECT_DIR$/jt/jt_manage/jt_manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot_demo1/springboot_demo1.iml" filepath="$PROJECT_DIR$/springboot_demo1/springboot_demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot_demo2/springboot_demo2.iml" filepath="$PROJECT_DIR$/springboot_demo2/springboot_demo2.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot_demo3/springboot_demo3.iml" filepath="$PROJECT_DIR$/springboot_demo3/springboot_demo3.iml" />
