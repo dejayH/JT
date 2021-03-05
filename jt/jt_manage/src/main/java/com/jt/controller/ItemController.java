@@ -19,7 +19,9 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	/*//在bean对象实例化之后执行  一般都是为属性赋值用的
+	/*
+	//在bean对象实例化之后执行  一般都是为属性赋值用的
+
 	@PostConstruct
 	public void aa(){
 
