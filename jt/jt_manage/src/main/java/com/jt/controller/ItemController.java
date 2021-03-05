@@ -2,6 +2,7 @@ package com.jt.controller;
 
 import com.jt.pojo.Item;
 import com.jt.vo.EasyUITable;
+import com.jt.vo.SysResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,13 @@ public class ItemController {
 	public EasyUITable findItemByPage(Integer page, Integer rows){
 
 		return itemService.findItemByPage(page,rows);
+	}
+
+	@RequestMapping("/save")
+
+	public SysResult itemSave(Item item){
+			itemService.saveItem(item);
+			return SysResult.success();
 	}
 
 	

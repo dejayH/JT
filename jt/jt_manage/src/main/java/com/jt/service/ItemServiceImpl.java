@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jt.pojo.Item;
 import com.jt.vo.EasyUITable;
+import com.jt.vo.SysResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jt.mapper.ItemMapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,6 +32,15 @@ public class ItemServiceImpl implements ItemService {
 		long total = iPage.getTotal();
 		List<Item> itemList = iPage.getRecords();	//获取当前页的记录
 		return new EasyUITable(total,itemList);
+	}
+
+	@Override
+	public void saveItem(Item item) {
+		item.setStatus(1)	//设定启动状态
+				.setCreated(new Date())
+				.setUpdated(item.getCreated());
+		itemMapper.insert(item);
+
 	}
 
 
