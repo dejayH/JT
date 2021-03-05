@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jt.mapper.ItemMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ public class ItemServiceImpl implements ItemService {
 		return new EasyUITable(total,itemList);
 	}
 
+	@Transactional
 	@Override
 	public void saveItem(Item item) {
 		item.setStatus(1)	//设定启动状态
