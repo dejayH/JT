@@ -17,30 +17,13 @@
    <div data-options="region:'west',title:'菜单',split:true" style="width:10%;">
    
   	<ul class="easyui-tree">
-  	
-  	<li>
-  	<span>商品管理</span>
-	  	<ul>
-	  		<li>商品查询</li>
-	  		<li>商品新增</li>
-	  		<li>
-	  			<span>我是三级biaoqian</span>
-	  			<ul>
-	  				<li>一</li>
-	  				<li>一</li>
-	  				<li>一</li>
-	  			</ul>
-	  		</li>
-	  	</ul>
-  	</li>
-  	
-  	
-  	<li>
-  	<span>内容管理</span>
-  	<ul>
-  		<li>内容新增</li>
-  	</ul>
-  	</li>
+        <li>
+            <span>商品新增</span>
+            <ul>
+                <li>新增</li>
+                <li>修改</li>
+            </ul>
+        </li>
   	</ul>
    
    </div>

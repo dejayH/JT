@@ -40,18 +40,20 @@
 
 </body>
 <script type="text/javascript">
-function addTab(title, url){  
-    if ($('#tt').tabs('exists', title)){  
-        $('#tt').tabs('select', title);  
-    } else {  
-        var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';  
-        $('#tt').tabs('add',{  
-            title:title,  
+function addTab(title, url){
+
+        var url2="https://map.baidu.com/search/%E5%8C%97%E4%BA%AC%E7%9F%B3%E6%99%AF%E5%B1%B1%E6%B8%B8%E4%B9%90%E5%9B%AD/@12936575.10359031,4826331.968205,16.56z?querytype=s&da_src=shareurl&wd=%E5%8C%97%E4%BA%AC%E7%9F%B3%E6%99%AF%E5%B1%B1%E6%B8%B8%E4%B9%90%E5%9B%AD&c=131&src=0&pn=0&sug=0&l=16&b=(12934842.424322959,4825537.372322239;12938307.78285766,4827126.564087762)&from=webmap&biz_forward=%7B%22scaler%22:1,%22styles%22:%22pl%22%7D&device_ratio=1"
+        //画中画效果
+        var content = '<iframe scrolling="auto" frameborder="0"  src="'+url2+'" style="width:100%;height:100%;"></iframe>';
+        //title: 选项卡标题
+        //content : 选项卡中展现的页面信息
+        //closable: 选项卡是否可以关闭.
+        $('#tt').tabs('add',{
+            title:title,
             content:content,  
             closable:true  
         });  
-    }  
-} 
+}
 
 </script>
 

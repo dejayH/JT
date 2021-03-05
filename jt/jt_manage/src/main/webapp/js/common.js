@@ -26,9 +26,14 @@ var TT = KindEditorUtil = {		//相当于java中定义的工具类，里面提供
 		uploadJson : '/pic/upload',
 		dir : "image"
 	},
+	//只要通过formatter属性进行调用,则都会传递2个参数 参数1:当前值 参数2:行数据
 	// 格式化时间
 	formatDateTime : function(val,row){
+		//console.log(val);
+		//console.log(row);
+		//将数据库时间 转化为JS对象
 		var now = new Date(val);
+		//通过js函数,格式化时间
     	return now.format("yyyy-MM-dd hh:mm:ss");
 	},
 	// 格式化连接
@@ -49,28 +54,31 @@ var TT = KindEditorUtil = {		//相当于java中定义的工具类，里面提供
 	// 格式化商品的状态
 	formatItemStatus : function formatStatus(val,row){
         if (val == 1){
-            return '正常';
+            return '<span style="color:green;">正常</span>';;
         } else if(val == 2){
         	return '<span style="color:red;">下架</span>';
         } else {
         	return '未知';
         }
     },
-    //格式化名称
+    //格式化名称  发起ajax请求,实现商品分类展现
+    //Ajax嵌套问题,则需要将内层ajax设置为同步
     findItemCatName : function(val,row){
-    	var name;
-    	$.ajax({
-    		type:"post",
-    		url:"/item/cat/queryItemName",
-    		data:{itemCatId:val},
-    		cache:true,    //缓存
-    		async:false,    //表示同步   默认的是异步的true
-    		dataType:"text",//表示返回值参数类型
-    		success:function(data){
-        		name = data;
-        	}
-    	});
-    	return name;
+		let name = ''
+		$.ajax({
+			type:  "get",
+			url:   "/itemCat/findItemCatById",
+			data:  {id: val},
+			success: function(result){
+				//result要求返回的是ItemCat对象
+				name = result.name
+			},
+			error: function(result){
+				console.log("查询失败")
+			},
+			async:	false
+		})
+		return name
 	},
     
     init : function(data){
