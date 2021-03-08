@@ -22,15 +22,19 @@
 </div>
 <script>
 
+
     function getSelectionsIds(){
+		//选中的是所有的表格数据信息
     	var itemList = $("#itemList");
-    	/*[item,item,item,item]*/
+		//获取用户选中的元素
     	var sels = itemList.datagrid("getSelections");
     	var ids = [];
+		// in  i index下标    of  对象
     	for(var i in sels){
+			//将用户获取的id封装到新的数组中
     		ids.push(sels[i].id);
     	}
-    	//将数组拼接成串 1,2,3,4,5
+		//设定连接符  拼接字符串  [1,2,3,4,5] =>1,2,3,4,5
     	ids = ids.join(",");
     	return ids;
     }
@@ -51,16 +55,19 @@
         		$.messager.alert('提示','必须选择一个商品才能编辑!');
         		return ;
         	}
+			//ids已经是一个字符串
         	if(ids.indexOf(',') > 0){
         		$.messager.alert('提示','只能选择一个商品!');
         		return ;
         	}
         	
         	$("#itemEditWindow").window({
+				//页面打开之后 执行的动作
         		onLoad :function(){
-        			//回显数据
+        			//获取用户选中的元素的对象  price 扩大100倍之后的数据  用户看到的是缩小100倍之后的数据
         			var data = $("#itemList").datagrid("getSelections")[0];
         			data.priceView = KindEditorUtil.formatPrice(data.price);
+					//将对象中的数据 按照form表单中的name属性 进行数据的回显
         			$("#itemeEditForm").form("load",data);
         			
         			// 加载商品描述
@@ -100,6 +107,18 @@
         				}
         			});
         			
+					
+					//根据id 动态获取商品分类名称
+					var cid = data.cid;
+					//通过ajax请求程序动态获取用户数据
+					$.get("/itemCat/findItemCatById",{id: cid},function(data){
+						var name = data.name
+						//如何将name属性绑定到分类表格中?
+						//.val("xxxx") value属性值    .text("xxxxx") 标签中间的文本值
+						$("#itemeEditForm input[name='cid']").prev().text(name)
+					})
+					
+					
         			KindEditorUtil.init({
         				"pics" : data.image,
         				"cid" : data.cid,
@@ -114,6 +133,7 @@
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
+			//获取用户选中的数据
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
         		$.messager.alert('提示','未选中商品!');
@@ -147,7 +167,7 @@
         	$.messager.confirm('确认','确定下架ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/item/instock",params, function(data){
+                	$.post("/item/updateStatus/2",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','下架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
@@ -169,7 +189,7 @@
         	$.messager.confirm('确认','确定上架ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/item/reshelf",params, function(data){
+                	$.post("/item/updateStatus/1",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','上架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");

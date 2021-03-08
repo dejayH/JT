@@ -1,17 +1,18 @@
 package com.jt.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jt.pojo.Item;
 import com.jt.vo.EasyUITable;
-import com.jt.vo.SysResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jt.mapper.ItemMapper;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,14 +36,49 @@ public class ItemServiceImpl implements ItemService {
 		return new EasyUITable(total,itemList);
 	}
 
-	@Transactional
+	@Transactional	//标记方式使用事务控制
 	@Override
 	public void saveItem(Item item) {
-		item.setStatus(1)	//设定启动状态
-				.setCreated(new Date())
-				.setUpdated(item.getCreated());
-		itemMapper.insert(item);
 
+		item.setStatus(1);	//设定启动状态
+				//.setCreated(new Date())
+				//.setUpdated(item.getCreated());
+		itemMapper.insert(item);
+	}
+
+	@Override
+	@Transactional
+	public void updateItem(Item item) {
+
+		itemMapper.updateById(item);
+	}
+
+	//方式1: 手写sql delete from tb_item where id in (xx,xx,xx...)
+	//方式2: 利用MP方式实现 作业
+	@Transactional
+	@Override
+	public void deleteItems(Long[] ids) {
+
+		itemMapper.deleteIds(ids);
+	}
+
+	/**
+	 * Sql: update tb_item set updated = #{updated},status = #{status}
+	 * 		where id in (xx,xx,xx,xx)
+	 * @param status
+	 * @param ids
+	 */
+	@Override
+	public void updateStatus(Integer status, Long[] ids) {
+		//参数1:实体对象  将要修改的数据封装
+		Item item = new Item();
+		item.setStatus(status);
+
+		//参数2:条件构造器  动态拼接where条件
+		UpdateWrapper updateWrapper = new UpdateWrapper();
+		//List<Long> idList = Arrays.asList(ids);
+		updateWrapper.in("id", ids);
+		itemMapper.update(item,updateWrapper);
 	}
 
 

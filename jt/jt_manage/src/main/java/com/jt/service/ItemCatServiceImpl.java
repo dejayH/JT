@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ItemCatServiceImpl implements ItemCatService {
+public class ItemCatServiceImpl implements  ItemCatService{
 
     @Autowired
     private ItemCatMapper itemCatMapper;
@@ -23,26 +23,29 @@ public class ItemCatServiceImpl implements ItemCatService {
     }
 
     /**
-     * 查询商品分类列表信息
-     *
+     * 1.根据parentId查询商品分类列表信息  一级商品分类信息
+     * 2.将商品分类列表转化为List<VO>对象
+     * 3.返回vo的list集合
      * @param parentId
      * @return
      */
     @Override
     public List<EasyUITree> findItemCatList(long parentId) {
-        QueryWrapper queryWrapper = new QueryWrapper();
+        //1.根据父级id查询子级的信息
+        QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id", parentId);
-        List<ItemCat> list = itemCatMapper.selectList(queryWrapper);
+        List<ItemCat> itemCatList = itemCatMapper.selectList(queryWrapper);
 
-        List<EasyUITree> li = new ArrayList<>(list.size());
-        for (ItemCat itemCat : list) {
+        //2.将itemCat对象 转化为VO对象
+        List<EasyUITree> voList = new ArrayList<>(itemCatList.size());
+        for (ItemCat itemCat : itemCatList){
             long id = itemCat.getId();
             String text = itemCat.getName();
+            //如果是父级则闭合,否则打开
             String state = itemCat.getIsParent() ? "closed" : "open";
-            EasyUITree tree = new EasyUITree(id, text, state);
-            li.add(tree);
+            EasyUITree tree = new EasyUITree(id,text, state);
+            voList.add(tree);
         }
-
-        return li;
+        return voList;
     }
 }

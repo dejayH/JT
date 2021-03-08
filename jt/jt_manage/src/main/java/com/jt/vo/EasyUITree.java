@@ -11,7 +11,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class EasyUITree {
 
-    private Long id;         //节点编号
-    private String text;     //节点名称
-    private String state;    //节点状态
+    private Long id;            //节点编号
+    private String text;        //节点名称
+    private String state;       //节点状态 open打开  closed关闭
+
 }

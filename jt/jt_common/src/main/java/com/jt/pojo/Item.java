@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @TableName("tb_item")
 @Data
 @Accessors(chain=true)
-public class Item extends BasePojo{
+public class Item extends BasePojo{	//子类继承父类 也实现了序列号接口
 	@TableId(type=IdType.AUTO)
 	private Long id;				//商品id
 	private String title;			//商品标题

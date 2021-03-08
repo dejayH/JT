@@ -10,7 +10,8 @@
 	            <td>商品类目:</td>
 	            <td>
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
-	            	<input type="hidden" name="cid" style="width: 280px;"></input>	
+	            	<input type="hidden"  name="cid" style="width: 280px;">
+					</input>	
 	            </td>
 	        </tr>
 	        <tr>
@@ -99,7 +100,7 @@
 		paramJson = JSON.stringify(paramJson);
 		
 		$("#itemeEditForm [name=itemParams]").val(paramJson);
-		alert($("#itemeEditForm").serialize());
+		
 		$.post("/item/update",$("#itemeEditForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','修改商品成功!','info',function(){

@@ -74,13 +74,17 @@
 	});
 	
 	function submitForm(){
-		//表单校验
+		//表单校验  如果满足校验规范,则返回值true 否则返回值false
 		if(!$('#itemAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
 		//转化价格单位，将元转化为分
+		//找到id为itemAddForm元素的子孙后代中含有属性name=price的元素
+		//$("xxx").val()   $("xxx").val(xxx)
+		//eval(通过该函数包裹,可以将类型转化为js对象 进行算数计算)
 		$("#itemAddForm [name=price]").val(eval($("#itemAddForm [name=priceView]").val()) * 100);
+		
 		itemAddEditor.sync();//将输入的内容同步到多行文本中
 		
 		var paramJson = [];
@@ -104,11 +108,13 @@
 		
 		$("#itemAddForm [name=itemParams]").val(paramJson);
 		
-		/*$.post/get(url,JSON,function(data){....})  
-			?id=1&title="天龙八部&key=value...."
-		*/
-		//alert($("#itemAddForm").serialize());
+		//ajax参数写法 2种  
+		//$("#itemAddForm").serialize()将整个表单数据进行key=value的拼接
+		//console.log($("#itemAddForm").serialize())
 		$.post("/item/save",$("#itemAddForm").serialize(), function(data){
+			
+			//前端如何判断后端服务器运行正常?  系统返回值变量
+			
 			if(data.status == 200){
 				$.messager.alert('提示','新增商品成功!');
 			}else{

@@ -19,7 +19,7 @@
 		$("#tree").tree({
 			url:"tree.json",		//加载远程JSON数据
 			method:"get",			//请求方式  POST
-			animate:true,			//表示显示折叠端口动画效果
+			animate:false,			//表示显示折叠端口动画效果
 			checkbox:true,			//表述复选框
 			lines:true,				//表示显示连接线
 			dnd:true,				//是否拖拽
@@ -34,7 +34,6 @@
 </head>
 	<body>
 		<h1>EasyUI-树形结构</h1>
-		
 		<ul id="tree"></ul>
 	</body>
 </html>
