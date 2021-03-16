@@ -1,6 +1,7 @@
 package com.jt.controller;
 
 import com.jt.pojo.Item;
+import com.jt.pojo.ItemDesc;
 import com.jt.vo.EasyUITable;
 import com.jt.vo.SysResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +52,15 @@ public class ItemController {
 	 * 	URL地址: 	http://localhost:8091/item/save
 	 * 	请求参数: 	form表单 item对象接收
 	 * 	返回值:		SysResult对象
+	 *
+	 * 重构新增:
+	 * 		参数:  Item对象,ItemDesc对象
+	 *
 	 */
 	@RequestMapping("/save")
-	public SysResult saveItem(Item item){
+	public SysResult saveItem(Item item, ItemDesc itemDesc){
 
-		itemService.saveItem(item);
+		itemService.saveItem(item,itemDesc);
 		return SysResult.success();
 	}
 
@@ -67,9 +72,9 @@ public class ItemController {
 	 * 返回值:  SysResult对象
 	 */
 	@RequestMapping("/update")
-	public SysResult updateItem(Item item){
+	public SysResult updateItem(Item item,ItemDesc itemDesc){
 
-		itemService.updateItem(item);
+		itemService.updateItem(item,itemDesc);
 		return SysResult.success();
 	}
 
@@ -102,7 +107,18 @@ public class ItemController {
 		return SysResult.success();
 	}
 
+	/**
+	 * 根据id查询商品分类名称
+	 * URL地址: /item/query/item/desc/'+data.id
+	 * 参数:	id
+	 * 返回值:  SysResult对象(itemDesc对象)
+	 */
+	@RequestMapping("/query/item/desc/{id}")
+	public SysResult findItemDescById(@PathVariable Long id){
 
+		ItemDesc itemDesc = itemService.findItemDescById(id);
+		return SysResult.success(itemDesc);
+	}
 
 
 

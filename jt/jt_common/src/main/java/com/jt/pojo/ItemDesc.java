@@ -2,11 +2,16 @@ package com.jt.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 @TableName("tb_item_desc")
+@Data
+@Accessors(chain = true)
 public class ItemDesc extends BasePojo{
-    @TableId
-    private Integer id;
 
-    private String itemDesc;
+    @TableId
+    private Long itemId;        //itemId与商品表的Id值一致.
+    private String itemDesc;    //商品详情信息
+
 }

@@ -26,8 +26,16 @@
 		</foreach>
 	</delete>
 
+	<!--
+		<insert id="xxxxx"  useGeneratedKeys="true" keyProperty="itemId" keyColumn="item_id">
 
+		</insert>
+	-->
 
+	<!--<delete id="xxx">
+		delete from tb_item where id in (100,101,102);
+		delete from tb_item_desc where id in (100,101,102)
+	</delete>-->
 
 
 </mapper>

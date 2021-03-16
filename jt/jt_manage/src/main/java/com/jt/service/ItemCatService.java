@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ItemCatService {
     ItemCat findItemCatById(Long id);
- 
+
     List<EasyUITree> findItemCatList(long parentId);
 }

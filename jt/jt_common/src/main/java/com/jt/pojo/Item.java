@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain=true)
 public class Item extends BasePojo{	//子类继承父类 也实现了序列号接口
-	@TableId(type=IdType.AUTO)
+	@TableId(type=IdType.AUTO)		//MP:主键自增时 会将主键的数据动态的回显给对象
 	private Long id;				//商品id
 	private String title;			//商品标题
 	private String sellPoint;		//商品卖点信息
